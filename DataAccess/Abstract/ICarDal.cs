@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-  public interface ICarDal : IGenericDal<Car>
+  public interface ICarDal : IEntityRepository<Car>
     {
-
-        //marka id sine bağlı arabalar listelenecek
-        List<Car> GetById(int brandId);
 
     }
 }
