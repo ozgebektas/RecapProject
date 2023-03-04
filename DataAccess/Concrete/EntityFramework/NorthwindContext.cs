@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-  public class MsSqlContext:DbContext
+  public class NorthwindContext:DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=LAPTOP-V33USC70;Database=DbCar;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer("server=LAPTOP-V33USC70;Database=DbCar1;Trusted_Connection=true");
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Color> Colors { get; set; }

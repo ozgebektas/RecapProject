@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(MsSqlContext))]
+    [DbContext(typeof(NorthwindContext))]
     [Migration("20230303173457_mig1")]
     partial class mig1
     {
