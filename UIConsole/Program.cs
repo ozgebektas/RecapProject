@@ -27,10 +27,20 @@ namespace UIConsole
         private static void ProductTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetAll();
+            if (result.Success)
             {
-                Console.WriteLine(car.CarName + "/" + car.BrandName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+           
         }
+
     }
 }
