@@ -1,6 +1,7 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 using System;
 
 namespace UIConsole
@@ -22,7 +23,18 @@ namespace UIConsole
             //    Console.WriteLine(brand.BrandName);
             //}
 
-            ProductTest();
+           // ProductTest();
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result = rentalManager.Add(new Rental {CarId=4, CustomerId=1,RentalId=3,RentDate= new DateTime(2020, 03, 05) });
+            if (result.Success)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
         private static void ProductTest()
         {
@@ -41,6 +53,9 @@ namespace UIConsole
             }
            
         }
+       
+        
+        
 
     }
 }

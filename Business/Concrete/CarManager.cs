@@ -25,10 +25,10 @@ namespace Business.Concrete
         {
             if (car.CarName.Length<2)
             {
-                return new ErrorResult(Messages.ProductNameInValid);
+                return new ErrorResult(Messages.NameInValid);
             }
             _carDal.Add(car);
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessResult(Messages.Added);
         }
 
         public  IDataResult<List<Car>> GetAll()
@@ -37,7 +37,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Car>>( _carDal.GetAll(),Messages.ProductListed);
+            return new SuccessDataResult<List<Car>>( _carDal.GetAll(),Messages.Listed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()

@@ -9,9 +9,10 @@ namespace Business.Constants
     //static newlenmediği için kullanılacak
    public static class Messages
     {
-        public static string ProductAdded = "Ürün eklendi";
-        public static string ProductNameInValid = "Ürün ismi geçersiz";
+        public static string Added = "Ürün eklendi";
+        public static string NameInValid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
-        public static string ProductListed = "Ürünler listelendi";
+        public static string Listed = "Ürünler listelendi";
+        public static string ReturnNotNull = "Araba kiralanamaz";
     }
 }
