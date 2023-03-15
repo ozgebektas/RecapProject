@@ -14,5 +14,16 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem bakımda";
         public static string Listed = "Ürünler listelendi";
         public static string ReturnNotNull = "Araba kiralanamaz";
+
+        public static string CarCountOfBrandError = "bir markadan en fazla 10 ürün seçilebilir";
+    }
+    public static class CarImagesMessages
+    {
+        public static string CarImageAdded = "Araç'a resim eklendi";
+        public static string CarImageDeleted = "Araç'ın resmi silindi";
+        public static string CarImageUpdated = "Araç'ın resmi güncellendi";
+        public static string CarImagesListed = "Araç resimlerinin tümü listelendi";
+        public static string CarImageByIdListed = "Seçilen araç'ın resmi listelendi";
+        public static string CarImageLimitExceded = "Görsel limitini aştığınız için daha fazla görsel eklenemiyor.";
     }
 }

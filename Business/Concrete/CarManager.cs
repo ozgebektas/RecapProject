@@ -28,8 +28,12 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-             _carDal.Add(car);
-            return new SuccessResult(Messages.Added);
+           if(CheckIfCarCountOfBrandCorrect(car.BrandId).Success)
+            {
+                _carDal.Add(car);
+                return new SuccessResult(Messages.Added);
+            }
+            return new ErrorResult(Messages.CarCountOfBrandError);
         }
       
 
@@ -55,6 +59,16 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>( _carDal.GetAll(p => p.ColorId == id));
+        }
+
+        private IResult CheckIfCarCountOfBrandCorrect(int brandId)
+        {
+            var result = _carDal.GetAll(c => c.BrandId == brandId).Count;
+            if (result > 10)
+            {
+                return new ErrorResult(Messages.CarCountOfBrandError);
+            }
+            return new SuccessResult();
         }
     }
 }
