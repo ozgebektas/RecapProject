@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,6 +21,12 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
+        public IResult Add(User user)
+        {
+            _userDal.Add(user);
+            return new SuccessResult(UserMessages.UserAdded);
+        }
+
         public IDataResult<List<User>> GetAll()
         {
             if (DateTime.Now.Hour == 12)
@@ -28,6 +35,16 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<User>>(_userDal.GetAll());
 
+        }
+
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
+
+        public List<OperationClaim> GetClaim(User user)
+        {
+            return _userDal.GetClaims(user);
         }
     }
 }
