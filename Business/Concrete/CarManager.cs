@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -24,8 +27,11 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        
+        [SecuredOperation("car.add")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
+        
         public IResult Add(Car car)
         {
            if(CheckIfCarCountOfBrandCorrect(car.BrandId).Success)
@@ -35,8 +41,20 @@ namespace Business.Concrete
             }
             return new ErrorResult(Messages.CarCountOfBrandError);
         }
-      
 
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if (car.DailyPrice < 50)
+            {
+                throw new Exception("");
+            }
+            Add(car);
+            return null;
+        }
+
+        [CacheAspect]
         public  IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
